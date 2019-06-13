@@ -8,10 +8,10 @@
     		<input v-model="password" type="password" placeholder="请输入密码">
     	</div>
     	<div class="code">验证码：
-    		<input v-model="code" ref="code" type="text" placeholder="请输入验证码">
+    		<input v-model="code" type="text" placeholder="请输入验证码">
     		<span @click="getcode">获取验证码</span>
     	</div>
-    	<button @click="get">登录</button>
+    	<el-button @click="login" type="success" plain>登录</el-button>
     </div>
   </div>
 </template>
@@ -27,19 +27,19 @@ export default {
   	}
   },
   methods:{
-  	get(){
+  	login(){
   		this.$axios.post('/api/user/login',{
   				username:this.username,
   				password:this.password,
   				code:this.code
   		}).then(data=>{
   			var data = data.data
-  			this.$router.push('/')
   			if(data.code==1){
-  				
   				localStorage.setItem('setUser',JSON.stringify(data))
           this.$router.push('/')
-  			}
+  			}else{
+          alert('请在想一下账号密码不正确')
+        }
   		})
   		
   	},
@@ -77,6 +77,7 @@ export default {
 	height:30px;
 	width:200px;
 	border-radius:8px;
+  border:0;
 }
 .pass{
 		color:green;
@@ -91,6 +92,7 @@ export default {
 	width:200px;
 	margin-left:20px;
 	border-radius:8px;
+  border:0;
 }
 .code{
 	color:red;
@@ -98,9 +100,10 @@ export default {
   margin-left:80px;
 }
 .code input{
-	width:120px;
   height:30px;
+  width:200px;
 	font-size:17px;
+  border:0;
 	border-radius:8px;
 }
 .code span{
@@ -109,12 +112,7 @@ export default {
 	margin-left:10px;
 }
 button{
-	width:100px;
-	height:50px;
 	margin-left:200px;
 	margin-top: 120px;
-	font-size:30px;
-	color:yellow;
-  background:blue;
 }
 </style>

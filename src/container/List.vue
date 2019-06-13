@@ -1,6 +1,6 @@
 <template>
   <div>
-  	<back></back>
+  	<heads></heads>
    	<el-container>
   		<el-main>
   			<el-container>
@@ -52,12 +52,12 @@
 
 <script>
 import Safe from '../components/common/Safe.vue'
-import Back from '../components/common/Back.vue'
+import Heads from '../components/common/Heads.vue'
 export default {
   name: 'Home',
   components:{
   	'safevue':Safe,
-  	'back':Back
+  	'heads':Heads
   },
   data(){
   	return {
@@ -71,28 +71,10 @@ export default {
   			pageSize:4
   		}
   	}).then(data=>{
-  		console.log(data.data.data)
-  		this.tableData=  data.data.data
+  		this.tableData = data.data.data
   	})
   },
   methods:{
-  	revise(){
-  		this.$router.push('/revise')
-  	},
-  	add(){
-  		this.$router.push('/add')
-  	},
-  	del(num){
-  		this.$axios.get('/api/user/del',{
-  			params:{
-  				id:num
-  			}
-  		}).then(data=>{
-  			this.tableData = this.tableData.filter(item=>{
-  				return item.id != num
-  			})
-  		})
-  	},
   	jump(val){
   		this.$axios.get('/api/user',{
   		params:{
@@ -100,7 +82,6 @@ export default {
   			pageSize:4
   		}
   	}).then(data=>{
-  		console.log(data.data.data)
   		this.tableData=  data.data.data
   	})
   	}

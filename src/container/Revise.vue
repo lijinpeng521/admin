@@ -1,6 +1,6 @@
 <template>
   <div>
-    <back></back>
+    <heads></heads>
    	<el-container>
   		<el-main>
   			<el-container>
@@ -23,7 +23,7 @@
 					  placeholder="添加住址"
 					  v-model="rev">
 					</el-input>
-					<button @click="revise">确认修改</button>
+					<el-button @click="revise" type="primary" plain>确认修改</el-button>
 			    </el-main>
 			  </el-container>
 
@@ -36,9 +36,9 @@
 
 <script>
 import Safe from '../components/common/Safe.vue'
-import Back from '../components/common/Back.vue'
+import Heads from '../components/common/Heads.vue'
 export default {
-  name: 'Home',
+  name: 'Revise',
   data(){
   	return {
   		tableData:[],
@@ -50,12 +50,12 @@ export default {
   },
   components:{
   	'safevue':Safe,
-    'back':Back
+    'heads':Heads
   },
   created(){
-  	var num = this.$route.params.id
-    this.num = num
-  	this.getmodel(num)
+
+    this.num =this.$route.params.id
+  	this.getmodel(this.num)
   },
   methods:{
   	getmodel(id){
@@ -103,17 +103,17 @@ export default {
     background-color: #E9EEF3;
     color: #333;
     padding: 0;
-    font-size: 50px;
+    font-size: 22px;
+}
+.el-main div{
+  font-size: 20px;
 }
 .el-main div input{
 	width:80%;
 	height:30px;
-	font-size:20px;
+  margin-top: 20px;
 }
 .el-main button{
-	color:blue;
-	width:100px;
-	height:30px;
 	font-size:20px;
 	margin-left:550px;
 	margin-top:50px;

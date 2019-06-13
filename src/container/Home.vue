@@ -1,6 +1,6 @@
 <template>
   <div>
-  	<back></back>
+  	<heads></heads>
    	<el-container>
   		<el-main>
   			<el-container>
@@ -20,13 +20,11 @@
 					    </el-table-column>
 					    <el-table-column
 					      prop="username"
-					      label="执行人"
+					      label="用户名称"
 					      width="180">
 					    </el-table-column>
 					    <el-table-column
-					      fixed="right"
-					      label="操作"
-					      width="500">
+					      label="操作">
 					      <template slot-scope="scope">
 					        <el-button type="text" size="small">
 					        	<router-link :to="{name:'look',params:{
@@ -36,9 +34,9 @@
 					        	</router-link>
 					        </el-button>
 					        <el-button @click="del(scope.row.id)" type="text" size="small">
-					        	删除信息	
+					        	<a href="">删除信息</a>	
 					 		</el-button>
-					    	<el-button @click="revise" type="text" size="small">
+					    	<el-button type="text" size="small">
 					    		<router-link :to="{name:'revise',params:{
 					    			id:scope.row.id
 					    		}}">
@@ -67,12 +65,12 @@
 
 <script>
 import Safe from '../components/common/Safe.vue'
-import Back from '../components/common/Back.vue'
+import Heads from '../components/common/Heads.vue'
 export default {
   name: 'Home',
   components:{
   	'safevue':Safe,
-  	'back':Back
+  	'heads':Heads
   },
   data(){
   	return {
@@ -91,12 +89,6 @@ export default {
   	})
   },
   methods:{
-  	revise(){
-  		this.$router.push('/revise')
-  	},
-  	add(){
-  		this.$router.push('/add')
-  	},
   	del(num){
   		this.$axios.get('/api/user/del',{
   			params:{
@@ -149,5 +141,6 @@ export default {
   }
   a{
   	color:#409EFF;
+    margin-left:50px;
   }
 </style>

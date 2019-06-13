@@ -1,6 +1,6 @@
 <template>
   <div>
-    <back></back>
+    <heads></heads>
    	<el-container>
   		<el-main>
   			<el-container>
@@ -12,7 +12,7 @@
 			      <div class="oll">
 			      	用户名称：<input v-model="username" type="text" placeholder="用户名"><br>
 			      	用户密码：<input v-model="password"  type="password" placeholder="用户密码"><br>
-			      	<button @click="ok">添加</button>
+			      	<el-button @click="addBtnFn" type="success" plain>添加用户</el-button>
 			      </div>	
 			      
 			    </el-main>
@@ -27,9 +27,9 @@
 
 <script>
 import Safe from '../components/common/Safe.vue'
-import Back from '../components/common/Back.vue'
+import Heads from '../components/common/Heads.vue'
 export default {
-  name: 'Home',
+  name: 'Add',
   data(){
   	return {
   		username:'',
@@ -38,10 +38,10 @@ export default {
   },
   components:{
   	'safevue':Safe,
-    'back':Back
+    'heads':Heads
   },
   methods:{
-  	ok(){
+  	addBtnFn(){
   		this.$axios.get('/api/user/add',{
   			params:{
   				username:this.username,
@@ -50,7 +50,6 @@ export default {
   			
   		}).then(data=>{
   			if(data.data.code==1){
-          alert('添加成功')
   				this.$router.push('/')
   			}
   		})
@@ -92,19 +91,13 @@ export default {
 	font-size:20px;
 	margin-left:20px;
 }
-.el-main button{
-	color:blue;
-	width:100px;
-	height:30px;
-	font-size:25px;
-	line-height:30px;
-	position: absolute;
-	top:200px;
-	left:170px;
-}
 .el-header {
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
+  }
+  button{
+    margin-top:100px; 
+    margin-left:180px;
   }
 </style>
